@@ -1,8 +1,8 @@
 databases:
-  - name: task-manager
+  - name: task_manager
     plan: free
-    databaseName: task-manager
-    user: postgres
+    databaseName: task_manager
+    user: postgresql
 
 services:
   - type: web
