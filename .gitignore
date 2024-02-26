@@ -1,0 +1,11 @@
+/.venv/
+**/__pycache__/
+setup.cfg_
+/dist/
+poetry.lock
+*.egg-info
+*.pyc
+.coverage
+coverage.xml
+.pytest_cache/
+.env
