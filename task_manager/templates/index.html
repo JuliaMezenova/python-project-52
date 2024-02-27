@@ -1,13 +1,9 @@
+{% extends "base.html"%}
+
 {% load django_bootstrap5 %}
 {% load i18n %}
 
-<!DOCTYPE html>
-<html>
-{% include 'head.html' %}
-
-<body class="d-flex flex-column min-vh-100">
-{% include 'nav.html' %}
-	
+{% block content %}	
 <div class="container wrapper flex-grow-1">
 		          
 <h1 class="my-4"></h1>
@@ -22,6 +18,4 @@
   </div>
 </div>
 
-{% include 'footer.html' %}
-</body>
-</html>
+{% endblock %}

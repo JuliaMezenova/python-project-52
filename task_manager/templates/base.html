@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+<html>
+
+{% include "head.html" %}
+
+<body class="d-flex flex-column min-vh-100">
+
+{% include "nav.html" %}
+
+{% block content %}{% endblock %}
+
+{% include "footer.html" %}
+
+</body>
+</html>
