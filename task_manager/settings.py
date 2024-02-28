@@ -141,14 +141,7 @@ if DEBUG == 'False':
     # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
     # and renames the files with unique names for each version to support long-term caching
     STATICFILES_STORAGE = {
-        "default": {
-            "BACKEND": "django.core.files.storage.FileSystemStorage",
-        },
-        "staticfiles": {
-            "BACKEND": {
-                'whitenoise.storage.CompressedManifestStaticFilesStorage',
-            },
-        }
+        'whitenoise.storage.CompressedManifestStaticFilesStorage',
     }
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
