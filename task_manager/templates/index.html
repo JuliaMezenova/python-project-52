@@ -3,11 +3,21 @@
 {% load django_bootstrap5 %}
 {% load i18n %}
 
+{% block nav %}
+{% if user.is_authenticated %}
+{% include "nav_user.html" %}
+{% else %}
+{% include "nav.html" %}
+{% endif %}
+{% endblock %}
+
 {% block content %}	
 <div class="container wrapper flex-grow-1">
-		          
+
+{% bootstrap_messages %}
+
 <h1 class="my-4"></h1>
-<h1 class="my-4"></h1>
+
 <div class="card">
   <div class="card-body p-5 bg-light">
 	  <div class="display-4">{% translate "Hello from Hexlet!" %}</div>

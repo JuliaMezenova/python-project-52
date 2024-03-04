@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block nav %}
+{% if user.is_authenticated %}
+{% include "nav_user.html" %}
+{% else %}
+{% include "nav.html" %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container wrapper flex-grow-1">
+{% bootstrap_messages %}
+  <h1 class="my-4">{% translate "Users" %}</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+	<th>ID</th>
+	<th>{% translate "User name" %}</th>
+	<th>{% translate "Full name" %}</th>
+	<th>{% translate "Created at" %}</th>
+	<th></th>
+      </tr>
+    </thead>
+    {% for user in users %}
+    <tbody>
+      <tr>
+	<td>{{ user.id }}</td>
+	<td>{{ user.username }}</td>
+	<td>{{ user.first_name }} {{ user.last_name }}</td>
+	<td>{{ user.created_at }}</td>
+	<td>
+	  <a href="{% url 'user_update' user.id %}">{% translate "Update" %}</a>
+	  <br>
+	  <a href="{% url 'user_delete' user.id %}">{% translate "Delete" %}</a>
+	</td>
+      </tr>
+    </tbody>
+    {% endfor %}
+</div>
+
+{% endblock %}
