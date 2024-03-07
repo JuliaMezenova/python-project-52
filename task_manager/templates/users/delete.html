@@ -12,7 +12,7 @@
     {% csrf_token %}
     <h1 class="my-4">{% translate "Delete user" %}</h1>
     <p>{% translate "Are you sure, you want to delete" %} {{ user.first_name }} {{ user.last_name }}?</p>
-    <button type="button" class="btn btn-danger">{% translate "Yes, delete" %}</button>
+    <input class="btn btn-danger" type="submit" value="{% translate "Yes, delete" %}">
   </form>
 </div>
 

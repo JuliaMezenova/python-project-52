@@ -15,3 +15,6 @@ lint:
 
 build:
 	./build.sh
+
+psql:
+	sudo service postgresql start
