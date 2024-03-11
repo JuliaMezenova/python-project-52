@@ -91,11 +91,11 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default=os.getenv('DATABASE_URL', f"sqlite:///{BASE_DIR/'db.sqlite3'}"), 
+        default=os.getenv('DATABASE_URL'), # f"sqlite:///{BASE_DIR/'db.sqlite3'}"
         conn_max_age=600
     )
 }
-if 'test' in sys.argv or 'test_coverage' in sys.argv:
+if 'test' in sys.argv or 'coverage' in sys.argv:
     DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 # Password validation
