@@ -56,6 +56,7 @@ class UserFormUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
+        form.save()
         password = form.cleaned_data.get('password1')
         if password:
             self.object.set_password(password)

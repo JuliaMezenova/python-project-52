@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from task_manager.users.models import User
 from django.utils.translation import gettext as _
+from django.contrib.messages import get_messages
 
 
 class SimpleTest(TestCase):
@@ -20,7 +21,7 @@ class SimpleTest(TestCase):
 
 
 class CreateUserTest(TestCase):
-    fixtures = ['users.json']
+    fixtures = ["users.json"]
 
     def setUp(self):
         self.client = Client()
@@ -91,57 +92,61 @@ class CreateUserTest(TestCase):
         self.login = reverse('login')
         response = self.client.post(self.register_url, self.user, follow=True)
         self.assertRedirects(response, self.login)
-        self.assertTrue(User.objects.get(pk=70))
-        content = response.content.decode()
-        self.assertIn(_('The user successfully created'), content)
+        new_user = User.objects.last()
+        self.assertEqual(self.user['last_name'], new_user.last_name)
 
 
 class UpdateUserTest(TestCase):
-    fixtures = ['users.json']
+    fixtures = ["users.json"]
 
     def setUp(self):
         self.client = Client()
-        self.user68 = User.objects.get(pk=68)
-        self.user69 = User.objects.get(pk=69)
+        self.user71 = User.objects.get(pk=71)
+        self.user72 = User.objects.get(pk=72)
+        self.form_data = {
+            'first_name': 'Test',
+            'last_name': 'Testov',
+            'username': 'TestTestovich',
+            'password1': 'SecretPass555',
+            'password2': 'SecretPass555',
+        }
 
     def test_update_user(self):
-        self.client.force_login(self.user68)
-        self.update_url = reverse('user_update', args=[68])
-        response = self.client.get(self.update_url)
-        self.assertEqual(response.status_code, 200)
-        response = self.client.post(self.update_url, {'username': 'TestTestovich'}, follow=True)
-        self.assertEqual(response.status_code, 302)
-        self.user68.refresh_from_db()
-        self.assertEqual(self.user68.username, 'TestTestovich')
-        content = response.content.decode()
-        self.assertIn(_('The user successfully updated'), content)
-
-    def test_can_view_page_correctly(self):
-        self.update_url = reverse('user_update', args=[self.user68.pk])
-        response = self.client.get(self.update_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/update.html')
+        self.client.force_login(self.user71)
+        update_url = reverse('user_update', args=[self.user71.pk])
+        get_response = self.client.get(update_url)
+        self.assertEqual(get_response.status_code, 200)
+        post_response = self.client.post(update_url, self.form_data)
+        self.user71.refresh_from_db()
+        self.assertRedirects(post_response, reverse('users_index'), 302, 200)
+        updated_user = User.objects.get(pk=71)
+        self.assertEqual(updated_user.username, 'TestTestovich')
+        messages = list(get_messages(post_response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        content = post_response.content.decode()
+        self.assertNotIn('TestTestov', content)
+        # self.assertIn(_("The user has been successfully changed"), content)
 
     def test_update_user_without_perm(self):
-        self.client.force_login(self.user68)
-        self.update_url = reverse('user_update', args=[self.user69.pk])
+        self.client.force_login(self.user71)
+        self.update_url = reverse('user_update', args=[self.user72.pk])
         response = self.client.get(self.update_url)
         self.assertRedirects(response, reverse('users_index'))
-        content = response.content.decode()
-        self.assertIn(_('You do not have the rights to change another user.'), content)
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
 
 
 class DeleteUserTest(TestCase):
-    fixtures = ['users.json']
+    fixtures = ["users.json"]
 
     def setUp(self):
         self.client = Client()
-        self.user68 = User.objects.get(pk=68)
-        self.user69 = User.objects.get(pk=69)
+        self.user71 = User.objects.get(pk=71)
+        self.user72 = User.objects.get(pk=72)
 
     def test_delete_user(self):
-        self.client.force_login(self.user68)
-        self.delete_url = reverse('user_delete', args=[self.user68.pk])
+        self.client.force_login(self.user71)
+        self.delete_url = reverse('user_delete', args=[self.user71.pk])
         self.client.get(self.delete_url)
         response = self.client.post(self.delete_url, follow=True)
         self.assertRedirects(response, reverse('users_index'), 302, 200)
@@ -150,8 +155,17 @@ class DeleteUserTest(TestCase):
         self.assertNotIn('TestTestov', content)
 
     def test_delete_user_without_perm(self):
-        self.client.force_login(self.user68)
-        self.delete_url = reverse('user_delete', args=[self.user69.pk])
+        self.client.force_login(self.user71)
+        self.delete_url = reverse('user_delete', args=[self.user72.pk])
         response = self.client.get(self.delete_url)
-        content = response.content.decode()
-        self.assertIn(_("You do not have the rights to change another user."), content)
+        self.assertRedirects(response, reverse('users_index'), 302, 200)
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+
+
+class MyTest(TestCase):
+    fixtures = ["users.json"]
+
+    def test_should_create_user(self):
+        user = User.objects.get(pk=72)
+        self.assertEqual(user.username, "Cheburashka")

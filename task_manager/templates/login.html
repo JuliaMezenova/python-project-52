@@ -5,9 +5,6 @@
 
 {% block content %}
 
-<div class="container wrapper flex-grow-1">
-
-{% bootstrap_messages %}
 <h1 class="my-4">{% translate "Log In" %}</h1>
 
 <form method="post">
@@ -15,7 +12,7 @@
   {% bootstrap_form form %}
   <input type="submit" class="btn btn-primary" value="{% translate "LogIn" %}">
 </form>
-</div> 
+ 
 {% endblock %}
 
 

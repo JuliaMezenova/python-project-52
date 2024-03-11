@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% block nav %}
+{% if user.is_authenticated %}
+{% include "nav_user.html" %}
+{% else %}
+{% include "nav.html" %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="my-4">{% translate "Statuses" %}</h1>
+  <a class="btn btn-primary mb-3" href="{% url 'status_create' %}">{% translate "Create status" %}</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+	<th>ID</th>
+	<th>{% translate "Name" %}</th>
+	<th>{% translate "Created at" %}</th>
+	<th></th>
+      </tr>
+    </thead>
+    {% for status in statuses %}
+    <tbody>
+      <tr>
+	<td>{{ status.id }}</td>
+	<td>{{ status.name }}</td>
+	<td>{{ status.timestamp }}</td>
+	<td>
+	  <a href="{% url 'status_update' status.id %}">{% translate "Update" %}</a>
+	  <br>
+	  <a href="{% url 'status_delete' status.id %}">{% translate "Delete" %}</a>
+	</td>
+      </tr>
+    </tbody>
+    {% endfor %}
+
+{% endblock %}

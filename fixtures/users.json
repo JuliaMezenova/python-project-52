@@ -1,27 +1,9 @@
 [
 {
     "model": "users.user",
-    "pk": 67,
+    "pk": 71,
     "fields": {
-        "password": "pbkdf2_sha256$390000$5OPjuaHtDg0Y4FWNu7h36R$D23pfxFDc8UxbMm6u/rsinoyN5syrQeOctR4638Wzc8=",
-        "last_login": "2024-03-06T11:33:24.668Z",
-        "is_superuser": true,
-        "username": "Julia21",
-        "first_name": "",
-        "last_name": "",
-        "email": "Julia21moon86@mail.ru",
-        "is_staff": true,
-        "is_active": true,
-        "date_joined": "2024-03-06T11:33:14.219Z",
-        "groups": [],
-        "user_permissions": []
-    }
-},
-{
-    "model": "users.user",
-    "pk": 68,
-    "fields": {
-        "password": "pbkdf2_sha256$390000$x5WHMceZ1GmzECaLvBC2IO$0Ok4SK2vnPh8hJz6Jb1mNeNYBl2+FIzTLqfT7vvSzjc=",
+        "password": "",
         "last_login": null,
         "is_superuser": false,
         "username": "TestTestov",
@@ -30,25 +12,25 @@
         "email": "",
         "is_staff": false,
         "is_active": true,
-        "date_joined": "2024-03-06T11:34:11Z",
+        "date_joined": "2024-03-08T18:01:59.764Z",
         "groups": [],
         "user_permissions": []
     }
 },
 {
     "model": "users.user",
-    "pk": 69,
+    "pk": 72,
     "fields": {
-        "password": "pbkdf2_sha256$390000$NUvJKKpIkXeMG9nHXksoZI$DbaW6c7ik4ZMhDDO/YGLtRpf6EAovCNIID575ZZS2Ow=",
+        "password": "",
         "last_login": null,
         "is_superuser": false,
-        "username": "UserUserov",
-        "first_name": "User",
-        "last_name": "Userov",
+        "username": "Cheburashka",
+        "first_name": "Anton",
+        "last_name": "Cheburashkin",
         "email": "",
         "is_staff": false,
         "is_active": true,
-        "date_joined": "2024-03-06T11:35:48Z",
+        "date_joined": "2024-03-08T18:03:44.546Z",
         "groups": [],
         "user_permissions": []
     }

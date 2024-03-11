@@ -22,6 +22,8 @@ from task_manager.views import IndexView, UserLoginView, UserLogoutView
 urlpatterns = [
     path('', IndexView.as_view(), name='home'),
     path('users/', include('task_manager.users.urls')),
+    path('statuses/', include('task_manager.statuses.urls')),
+    path('tasks/', include('task_manager.tasks.urls')),
     path('admin/', admin.site.urls),
     path('login/', UserLoginView.as_view(), name='login'),
     path('logout/', UserLogoutView.as_view(next_page='home'), name='logout'),
