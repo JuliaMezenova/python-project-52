@@ -24,6 +24,9 @@ jobs:
           pip install poetry
           make install
       - name: Run tests
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: True
         run: make test
       - name: Run linter
         run: make lint
@@ -32,6 +35,7 @@ jobs:
         if: github.ref_name == 'main'
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         with:
           coverageCommand: make test-coverage
           debug: true
