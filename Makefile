@@ -18,3 +18,8 @@ build:
 
 psql:
 	sudo service postgresql start
+
+test-coverage:
+	poetry run coverage run --source='.' manage.py test
+	poetry run coverage xml
+	poetry run coverage report
