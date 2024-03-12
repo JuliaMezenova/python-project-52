@@ -17,25 +17,24 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
         # make depends on poetry
-      - name: Start Postgresql
-        run: sudo service postgresql restart
+        # - name: Start Postgresql
+        # run: sudo service postgresql restart
       - name: Install dependencies
         run: | 
           pip install poetry
           make install
       - name: Run tests
         env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          SECRET_KEY: secret_key
           DEBUG: True
         run: make test
       - name: Run linter
         run: make lint
-      - name: Test & publish code coverage
+      - name: Publish code coverage
         uses: paambaati/codeclimate-action@v5.0.0
         if: github.ref_name == 'main'
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         with:
           coverageCommand: make test-coverage
           debug: true
