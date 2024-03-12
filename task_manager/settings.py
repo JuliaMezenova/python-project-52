@@ -100,7 +100,7 @@ if os.getenv("DATABASE_URL"):
     # use db from env if it exists
     DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
 # else:
-if 'test' in sys.argv or 'coverage' in sys.argv:    
+if 'test' in sys.argv or 'coverage' in sys.argv:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
