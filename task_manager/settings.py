@@ -89,8 +89,8 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 DATABASES = {
     'default': dj_database_url.config(
-        os.getenv("DATABASE_URL"), f"sqlite:///{BASE_DIR/'db.sqlite3'}",
-        conn_max_age=600
+        os.getenv("DATABASE_URL"), f"sqlite:///{BASE_DIR/'db.sqlite3'}"
+        # conn_max_age=600
     )
 }
 # Password validation
