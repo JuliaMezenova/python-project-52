@@ -25,7 +25,7 @@ jobs:
           make install
       - name: Run tests
         env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          SECRET_KEY: secret
           DEBUG: True
         run: make test
       - name: Run linter
