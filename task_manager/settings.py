@@ -26,7 +26,7 @@ load_dotenv()
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', "some value if your key is not in the environment")
+SECRET_KEY = os.getenv('SECRET_KEY', "test_secret_key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False)
@@ -88,25 +88,25 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=os.getenv('DATABASE_URL'),  # f"sqlite:///{BASE_DIR/'db.sqlite3'}"),
-#         conn_max_age=600
-#     )
-# }
+DATABASES = {
+    'default': dj_database_url.config(
+        os.getenv("DATABASE_URL"), f"sqlite:///{BASE_DIR/'db.sqlite3'}",
+        conn_max_age = 600
+    )
+}
 # if 'test' in sys.argv or 'coverage' in sys.argv:
 #     DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
-if os.getenv("DATABASE_URL"):
+#if os.getenv("DATABASE_URL"):
     # use db from env if it exists
-    DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
-# else:
-if 'test' in sys.argv or 'coverage' in sys.argv:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
+#    DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
+#else:
+#if 'test' in sys.argv or 'coverage' in sys.argv:
+#    DATABASES = {
+#        "default": {
+#            "ENGINE": "django.db.backends.sqlite3",
+#            "NAME": BASE_DIR / "db.sqlite3",
+#        }
+#    }
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
