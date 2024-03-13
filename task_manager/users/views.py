@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models.deletion import ProtectedError
 
 
 class IndexView(View):
@@ -81,3 +82,10 @@ class UserFormDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         if not request.user.is_authenticated:
             messages.error(request, _("You are not logged in! Please log in."))
         return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            return super().post(request, *args, **kwargs)
+        except ProtectedError:
+            messages.error(request, _("It is not possible to delete a user because it is being used"))
+            return redirect(reverse_lazy('users_index'))

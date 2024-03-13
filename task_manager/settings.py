@@ -87,11 +87,7 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         os.getenv("DATABASE_URL"), f"sqlite:///{BASE_DIR/'db.sqlite3'}")
-#         # conn_max_age=600
-# }
+
 if os.getenv("DATABASE_URL"):
     # use db from env if it exists
     DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}

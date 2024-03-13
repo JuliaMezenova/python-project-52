@@ -1,0 +1,26 @@
+[
+{
+    "model": "statuses.status",
+    "pk": 1,
+    "fields": {
+        "name": "In work",
+        "timestamp": "2024-03-12T13:54:07.497Z"
+    }
+},
+{
+    "model": "statuses.status",
+    "pk": 2,
+    "fields": {
+        "name": "On Testing",
+        "timestamp": "2024-03-12T13:54:33.206Z"
+    }
+},
+{
+    "model": "statuses.status",
+    "pk": 3,
+    "fields": {
+        "name": "New",
+        "timestamp": "2024-03-12T13:54:55.690Z"
+    }
+}
+]

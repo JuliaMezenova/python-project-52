@@ -8,7 +8,6 @@ from django.utils.translation import gettext as _
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
-# from django.db.models.deletion import ProtectedError
 
 
 class IndexView(View):
@@ -67,5 +66,5 @@ class TaskFormDeleteView(SuccessMessageMixin, DeleteView):
 
 class TaskShowIndex(DetailView):
     model = Task
-    template_name = 'tasks/show_task.html'
+    template_name = 'tasks/task_show.html'
     context_object_name = 'task'
