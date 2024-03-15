@@ -1,16 +1,18 @@
 {% extends "base.html" %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+
 {% block nav %}
 {% include "nav_user.html" %}
 {% endblock %}
-{% load django_bootstrap5 %}
-{% load i18n %}
 
 {% block content %}
 
   <form method="post">
     {% csrf_token %}
-    <h1 class="my-4">{% translate "Deleting task" %}</h1>
-    <p>{% translate "Are you sure, you want to delete" %} {{ task.name }}?</p>
+    <h1 class="my-4">{% translate "Deleting label" %}</h1>
+    <p>{% translate "Are you sure, you want to delete" %} {{ label.name }}?</p>
     <input class="btn btn-danger" type="submit" value="{% translate "Yes, delete" %}">
   </form>
 

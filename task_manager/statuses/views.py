@@ -26,14 +26,11 @@ class IndexView(View):
         )
 
 
-class StatusFormCreateView(CreateView):
+class StatusFormCreateView(SuccessMessageMixin, CreateView):
     form_class = StatusForm
     template_name = 'statuses/create.html'
     success_url = reverse_lazy('statuses_index')
-
-    def dispatch(self, request, *args, **kwargs):
-        messages.success(request, _("Status successfully created"))
-        return super().dispatch(request, *args, **kwargs)
+    success_message = _("Status successfully created")
 
 
 class StatusFormUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):

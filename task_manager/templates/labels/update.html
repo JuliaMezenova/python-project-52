@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% block nav %}
+{% include "nav_user.html" %}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="my-4">{% translate "Changing label" %}</h1>
+
+  <form method="post">
+  {% csrf_token %}
+
+  {% bootstrap_form form %}
+
+    <input class="btn btn-primary" type="submit" value={% translate "Change" %}>
+  </form>
+  
+{% endblock %}

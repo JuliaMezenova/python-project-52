@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 
 
-class Status(models.Model):
+class Label(models.Model):
     name = models.CharField(_("Name"), max_length=255, unique=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 

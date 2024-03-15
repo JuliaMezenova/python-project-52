@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import User
-from .forms import RegisterUserForm
+from .forms import RegisterUserForm, UpdateUserForm
 from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -38,7 +38,7 @@ class UserFormCreateView(CreateView):
 
 class UserFormUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
-    form_class = RegisterUserForm
+    form_class = UpdateUserForm
     template_name = 'users/update.html'
     success_url = reverse_lazy('users_index')
     success_message = _("The user has been successfully changed")

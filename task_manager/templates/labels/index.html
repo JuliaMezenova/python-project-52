@@ -13,28 +13,28 @@
 
 {% block content %}
 
-  <h1 class="my-4">{% translate "Users" %}</h1>
+
+  <h1 class="my-4">{% translate "Labels" %}</h1>
+  <a class="btn btn-primary mb-3" href="{% url 'label_create' %}">{% translate "Create label" %}</a>
   <table class="table table-striped">
     <thead>
       <tr>
 	<th>ID</th>
-	<th>{% translate "User name" %}</th>
-	<th>{% translate "Full name" %}</th>
+	<th>{% translate "Name" %}</th>
 	<th>{% translate "Created at" %}</th>
 	<th></th>
       </tr>
     </thead>
-    {% for user in users %}
+    {% for label in labels %}
     <tbody>
       <tr>
-	<td>{{ user.id }}</td>
-	<td>{{ user.username }}</td>
-	<td>{{ user.first_name }} {{ user.last_name }}</td>
-	<td>{{ user.date_joined }}</td>
+	<td>{{ label.id }}</td>
+	<td>{{ label.name }}</td>
+	<td>{{ label.timestamp }}</td>
 	<td>
-	  <a href="{% url 'user_update' user.id %}">{% translate "Update" %}</a>
+	  <a href="{% url 'label_update' label.id %}">{% translate "Update" %}</a>
 	  <br>
-	  <a href="{% url 'user_delete' user.id %}">{% translate "Delete" %}</a>
+	  <a href="{% url 'label_delete' label.id %}">{% translate "Delete" %}</a>
 	</td>
       </tr>
     </tbody>

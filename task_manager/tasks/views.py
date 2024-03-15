@@ -24,14 +24,11 @@ class IndexView(View):
         )
 
 
-class TaskFormCreateView(CreateView):
+class TaskFormCreateView(SuccessMessageMixin, CreateView):
     form_class = TaskForm
     template_name = 'tasks/create.html'
     success_url = reverse_lazy('tasks_index')
-
-    def dispatch(self, request, *args, **kwargs):
-        messages.success(request, _("Task successfully created"))
-        return super().dispatch(request, *args, **kwargs)
+    success_message = _("Task successfully created")
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
