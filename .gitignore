@@ -11,3 +11,4 @@ coverage.xml
 .env
 db.sqlite3
 /myvenv/
+/staticfiles/
