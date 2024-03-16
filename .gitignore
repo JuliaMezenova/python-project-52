@@ -10,3 +10,4 @@ coverage.xml
 .pytest_cache/
 .env
 db.sqlite3
+/myvenv/
