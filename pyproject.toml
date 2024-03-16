@@ -17,6 +17,7 @@ uvicorn = "^0.27.1"
 django-bootstrap5 = "^23.3"
 coverage = "^7.4.3"
 django-filter = "^24.1"
+rollbar = "^1.0.0"
 
 
 [build-system]
