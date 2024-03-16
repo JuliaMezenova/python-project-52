@@ -4,38 +4,87 @@
     "pk": 1,
     "fields": {
         "name": "Make project number 4",
-        "description": "PROJECT \"Task manager\" 4",
+        "description": "Project 4 \"Task manager\"",
         "status": 3,
         "author": 1,
         "executor": 1,
-        "labels": "",
-        "created_at": "2024-03-13T17:20:07.643Z"
+        "created_at": "2024-03-16T08:15:54.610Z"
     }
 },
 {
     "model": "tasks.task",
     "pk": 2,
     "fields": {
-        "name": "Make project number 4 from Cheburashka",
-        "description": "Project \"Task manager\"",
-        "status": 3,
-        "author": 72,
-        "executor": 1,
-        "labels": "",
-        "created_at": "2024-03-13T17:22:53.165Z"
+        "name": "To grow a flowers",
+        "description": "To grow a roses, romashki, fialki, hydrangeas",
+        "status": 1,
+        "author": 1,
+        "executor": 3,
+        "created_at": "2024-03-16T08:17:16.098Z"
     }
 },
 {
     "model": "tasks.task",
     "pk": 3,
     "fields": {
-        "name": "Make project number 4 from Julia21",
-        "description": "Project \"Task Manager\"",
-        "status": 2,
-        "author": 72,
-        "executor": 72,
-        "labels": "",
-        "created_at": "2024-03-13T17:24:05.141Z"
+        "name": "To wash the car",
+        "description": "To wash the car on the river",
+        "status": 1,
+        "author": 2,
+        "executor": 2,
+        "created_at": "2024-03-16T08:20:12.540Z"
+    }
+},
+{
+    "model": "tasks.task",
+    "pk": 4,
+    "fields": {
+        "name": "To cook supper",
+        "description": "To cook chiken and pasta",
+        "status": 4,
+        "author": 3,
+        "executor": 2,
+        "created_at": "2024-03-16T08:22:15.218Z"
+    }
+},
+{
+    "model": "tasks.labelfortask",
+    "pk": 1,
+    "fields": {
+        "task": 1,
+        "labels": 1
+    }
+},
+{
+    "model": "tasks.labelfortask",
+    "pk": 2,
+    "fields": {
+        "task": 2,
+        "labels": 1
+    }
+},
+{
+    "model": "tasks.labelfortask",
+    "pk": 3,
+    "fields": {
+        "task": 2,
+        "labels": 2
+    }
+},
+{
+    "model": "tasks.labelfortask",
+    "pk": 4,
+    "fields": {
+        "task": 2,
+        "labels": 3
+    }
+},
+{
+    "model": "tasks.labelfortask",
+    "pk": 5,
+    "fields": {
+        "task": 2,
+        "labels": 4
     }
 }
 ]

@@ -8,17 +8,24 @@ from django.utils.translation import gettext as _
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
+from django_filters.views import FilterView
+from .filter import TaskFilter
 
 
-class IndexView(View):
+class IndexView(FilterView):
+    model = Task
+#    context_object_name = 'tasks'
+#    template_name = 'tasks/index.html'
+    
     def get(self, request, *args, **kwargs):
-        tasks = Task.objects.all()[:]
-        flash_messages = messages.get_messages(request)
+        tasks = Task.objects.all()
+        task_filter = TaskFilter(request.GET, queryset=tasks, request=request)
+        flash_messages = messages.get_messages(self.request)
         return render(
             request,
             'tasks/index.html',
             context={
-                'tasks': tasks,
+                'filter': task_filter,
                 'messages': flash_messages,
             }
         )

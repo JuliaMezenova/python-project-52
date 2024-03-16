@@ -10,8 +10,8 @@ class StatusTest(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.get(pk=71)
-        self.client.force_login(self.user)
+        self.user3 = User.objects.get(pk=3)
+        self.client.force_login(self.user3)
         self.form_data = {
             'create': {'name': 'New status'},
             'update': {'name': 'Updated status'},
@@ -19,6 +19,7 @@ class StatusTest(TestCase):
         self.status1 = Status.objects.get(pk=1)
         self.status2 = Status.objects.get(pk=2)
         self.status3 = Status.objects.get(pk=3)
+        self.status4 = Status.objects.get(pk=4)
         self.statuses_list = reverse('statuses_index')
 
     def test_create_status(self):
@@ -27,7 +28,7 @@ class StatusTest(TestCase):
         self.assertEqual(get_response.status_code, 200)
         post_response = self.client.post(create_url, self.form_data['create'], follow=True)
         self.assertRedirects(post_response, self.statuses_list)
-        self.assertTrue(Status.objects.get(pk=4))
+        self.assertTrue(Status.objects.get(pk=5))
         content = post_response.content.decode()
         self.assertIn('New status', content)
         self.assertContains(post_response, _("Status successfully created"))
@@ -43,15 +44,26 @@ class StatusTest(TestCase):
         self.assertIn('Updated status', content)
         self.assertContains(post_response, _("Status successfully changed"))
 
-    def test_delete_not_used_status(self):
-        delete_url = reverse('status_delete', args=[2])
+    def test_delete_used_status(self):
+        delete_url = reverse('status_delete', args=[self.status1.pk])
         get_response = self.client.get(delete_url)
         self.assertEqual(get_response.status_code, 200)
         post_response = self.client.post(delete_url, follow=True)
         self.assertRedirects(post_response, self.statuses_list)
-        self.assertEqual(len(Status.objects.all()), 2)
+        self.assertEqual(len(Status.objects.all()), 4)
         content = post_response.content.decode()
-        self.assertNotIn('On Testing', content)
+        self.assertIn('New', content)
+        self.assertContains(post_response, _("It is not possible to delete a status because it is being used"))
+
+    def test_delete_not_used_status(self):
+        delete_url = reverse('status_delete', args=[self.status2.pk])
+        get_response = self.client.get(delete_url)
+        self.assertEqual(get_response.status_code, 200)
+        post_response = self.client.post(delete_url, follow=True)
+        self.assertRedirects(post_response, self.statuses_list)
+        self.assertEqual(len(Status.objects.all()), 3)
+        content = post_response.content.decode()
+        self.assertNotIn('In work', content)
         self.assertContains(post_response, _("Status successfully deleted"))
 
     def test_read_status(self):
@@ -65,5 +77,5 @@ class MyTest(TestCase):
     fixtures = ["statuses.json"]
 
     def test_should_create_status(self):
-        status = Status.objects.get(pk=3)
-        self.assertEqual(status.name, "New")
+        status = Status.objects.get(pk=4)
+        self.assertEqual(status.name, "Completed")

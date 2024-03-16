@@ -3,24 +3,32 @@
     "model": "statuses.status",
     "pk": 1,
     "fields": {
-        "name": "In work",
-        "timestamp": "2024-03-12T13:54:07.497Z"
+        "name": "New",
+        "timestamp": "2024-03-16T08:11:56.105Z"
     }
 },
 {
     "model": "statuses.status",
     "pk": 2,
     "fields": {
-        "name": "On Testing",
-        "timestamp": "2024-03-12T13:54:33.206Z"
+        "name": "In work",
+        "timestamp": "2024-03-16T08:12:10.272Z"
     }
 },
 {
     "model": "statuses.status",
     "pk": 3,
     "fields": {
-        "name": "New",
-        "timestamp": "2024-03-12T13:54:55.690Z"
+        "name": "On testing",
+        "timestamp": "2024-03-16T08:12:24.080Z"
+    }
+},
+{
+    "model": "statuses.status",
+    "pk": 4,
+    "fields": {
+        "name": "Completed",
+        "timestamp": "2024-03-16T08:13:22.383Z"
     }
 }
 ]

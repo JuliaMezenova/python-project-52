@@ -14,6 +14,14 @@
 
   <h1 class="my-4">{% translate "Tasks" %}</h1>
   <a class="btn btn-primary mb-3" href="{% url 'task_create' %}">{% translate "Create task" %}</a>
+  
+  <div class="card-body bg-light">
+    <form method="get">
+      {% bootstrap_form filter.form %}
+      <input class="btn btn-primary" type="submit" value="{% translate 'Show' %}">
+    </form>
+  </div>
+
   <table class="table table-striped">
     <thead>
       <tr>
@@ -26,7 +34,7 @@
 	<th></th>
       </tr>
     </thead>
-    {% for task in tasks %}
+    {% for task in filter.qs %}
     <tbody>
       <tr>
 	<td>{{ task.id }}</td>

@@ -101,8 +101,9 @@ class UpdateUserTest(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.user71 = User.objects.get(pk=71)
-        self.user72 = User.objects.get(pk=72)
+        self.user1 = User.objects.get(pk=1)
+        self.user2 = User.objects.get(pk=2)
+        self.user3 = User.objects.get(pk=3)
         self.form_data = {
             'first_name': 'Test',
             'last_name': 'Testov',
@@ -112,27 +113,27 @@ class UpdateUserTest(TestCase):
         }
 
     def test_update_user(self):
-        self.client.force_login(self.user71)
-        update_url = reverse('user_update', args=[self.user71.pk])
-        get_response = self.client.get(update_url)
+        self.client.force_login(self.user2)
+        update_url = reverse('user_update', args=[self.user2.pk])
+        get_response = self.client.get(update_url, follow=True)
         self.assertEqual(get_response.status_code, 200)
-        post_response = self.client.post(update_url, self.form_data)
-        self.user71.refresh_from_db()
+        post_response = self.client.post(update_url, self.form_data, follow=True)
+        self.user2.refresh_from_db()
         self.assertRedirects(post_response, reverse('users_index'), 302, 200)
-        updated_user = User.objects.get(pk=71)
+        updated_user = User.objects.get(pk=2)
         self.assertEqual(updated_user.username, 'TestTestovich')
         messages = list(get_messages(post_response.wsgi_request))
         self.assertEqual(len(messages), 1)
         content = post_response.content.decode()
-        self.assertNotIn('TestTestov', content)
-        # self.assertIn(_("The user has been successfully changed"), content)
+        self.assertNotIn('Crocodile', content)
+        self.assertContains(post_response, _("The user has been successfully changed"))
 
     def test_update_user_without_perm(self):
-        self.client.force_login(self.user71)
-        self.update_url = reverse('user_update', args=[self.user72.pk])
-        response = self.client.get(self.update_url)
-        self.assertRedirects(response, reverse('users_index'))
-        messages = list(get_messages(response.wsgi_request))
+        self.client.force_login(self.user3)
+        self.update_url = reverse('user_update', args=[self.user2.pk])
+        get_response = self.client.get(self.update_url)
+        self.assertRedirects(get_response, reverse('users_index'))
+        messages = list(get_messages(get_response.wsgi_request))
         self.assertEqual(len(messages), 1)
 
 
@@ -141,25 +142,26 @@ class DeleteUserTest(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.user71 = User.objects.get(pk=71)
-        self.user72 = User.objects.get(pk=72)
+        self.user1 = User.objects.get(pk=1)
+        self.user2 = User.objects.get(pk=2)
+        self.user3 = User.objects.get(pk=3)
 
     def test_delete_user(self):
-        self.client.force_login(self.user71)
-        self.delete_url = reverse('user_delete', args=[self.user71.pk])
+        self.client.force_login(self.user2)
+        self.delete_url = reverse('user_delete', args=[self.user2.pk])
         self.client.get(self.delete_url)
-        response = self.client.post(self.delete_url, follow=True)
-        self.assertRedirects(response, reverse('users_index'), 302, 200)
-        content = response.content.decode()
+        post_response = self.client.post(self.delete_url, follow=True)
+        self.assertRedirects(post_response, reverse('users_index'), 302, 200)
+        content = post_response.content.decode()
         self.assertIn(_("The user has been successfully deleted"), content)
-        self.assertNotIn('TestTestov', content)
+        self.assertNotIn('Crocodile', content)
 
     def test_delete_user_without_perm(self):
-        self.client.force_login(self.user71)
-        self.delete_url = reverse('user_delete', args=[self.user72.pk])
-        response = self.client.get(self.delete_url)
-        self.assertRedirects(response, reverse('users_index'), 302, 200)
-        messages = list(get_messages(response.wsgi_request))
+        self.client.force_login(self.user1)
+        self.delete_url = reverse('user_delete', args=[self.user3.pk])
+        get_response = self.client.get(self.delete_url)
+        self.assertRedirects(get_response, reverse('users_index'), 302, 200)
+        messages = list(get_messages(get_response.wsgi_request))
         self.assertEqual(len(messages), 1)
 
 
@@ -167,5 +169,5 @@ class MyTest(TestCase):
     fixtures = ["users.json"]
 
     def test_should_create_user(self):
-        user = User.objects.get(pk=72)
+        user = User.objects.get(pk=3)
         self.assertEqual(user.username, "Cheburashka")
