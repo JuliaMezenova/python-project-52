@@ -6,7 +6,7 @@ from django.utils.translation import gettext as _
 
 
 class TaskTest(TestCase):
-    fixtures = ["tasks.json", "statuses.json", "users.json"]
+    fixtures = ["tasks.json", "statuses.json", "users.json", "labels.json"]
 
     def setUp(self):
         self.client = Client()
@@ -98,38 +98,35 @@ class TaskTest(TestCase):
     
     def test_task_filter(self):
         self.client.force_login(self.user1)
-
         request_form_1 = f'{self.tasks_list}?status=3&executor=&label=1'
         get_response = self.client.get(request_form_1)
-        filtered_tasks = get_response.context['filter']
-        self.assertEqual(len(filtered_tasks.qs), 1)
+        filtered_tasks = get_response.context['filtered_tasks']
+        self.assertEqual(filtered_tasks.count(), 1)
         result_task1 = filtered_tasks[0]
-        self.assertEqual(task.name, 'Make project number 4')
-        self.assertEqual(task.status, 'On testing')
-        self.assertEqual(task.author, 'Julia21')
-
+        self.assertEqual(result_task1.name, 'Make project number 4')
+        self.assertEqual(result_task1.status, 'On testing')
+        self.assertEqual(result_task1.author, 'Julia Mezenova')
         request_form_2 = f'{self.tasks_list}?status=&executor=&label=&only_self_tasks=on'
         get_response = self.client.get(request_form_2)
-        filtered_tasks = get_response.context['filter']
-        self.assertEqual(len(filtered_tasks.qs), 2)
+        filtered_tasks = get_response.context['filtered_tasks']
+        self.assertEqual(filtered_tasks.count(), 2)
         result_task1 = filtered_tasks[0]
-        self.assertEqual(task.id, 1)
-        self.assertEqual(task.status, 'On Testing')
+        self.assertEqual(result_task1.id, 1)
+        self.assertEqual(result_task1.status, 'On testing')
         result_task2 = filtered_tasks[1]
-        self.assertEqual(task.id, 2)
-        self.assertEqual(task.status, 'New')
-
+        self.assertEqual(result_task2.id, 2)
+        self.assertEqual(result_task2.status, 'New')
         request_form_3 = f'{self.tasks_list}?status=4&executor=2&label='
         get_response = self.client.get(request_form_3)
-        filtered_tasks = get_response.context['filter']
-        self.assertEqual(len(filtered_tasks.qs), 1)
+        filtered_tasks = get_response.context['filtered_tasks']
+        self.assertEqual(filtered_tasks.count(), 1)
         result_task1 = filtered_tasks[0]
-        self.assertEqual(task.id, 4)
-        self.assertEqual(task.status, 'Completed')
+        self.assertEqual(result_task1.id, 4)
+        self.assertEqual(result_task1.status, 'Completed')
 
 
 class MyTest(TestCase):
-    fixtures = ["tasks.json", "statuses.json", "users.json"]
+    fixtures = ["tasks.json", "users.json", "statuses.json", "labels.json"]
 
     def test_should_create_task(self):
         task = Task.objects.get(pk=3)

@@ -14,21 +14,9 @@ from .filter import TaskFilter
 
 class IndexView(FilterView):
     model = Task
-#    context_object_name = 'tasks'
-#    template_name = 'tasks/index.html'
-    
-    def get(self, request, *args, **kwargs):
-        tasks = Task.objects.all()
-        task_filter = TaskFilter(request.GET, queryset=tasks, request=request)
-        flash_messages = messages.get_messages(self.request)
-        return render(
-            request,
-            'tasks/index.html',
-            context={
-                'filter': task_filter,
-                'messages': flash_messages,
-            }
-        )
+    context_object_name = 'filtered_tasks'
+    template_name = 'tasks/index.html'
+    filterset_class = TaskFilter
 
 
 class TaskFormCreateView(SuccessMessageMixin, CreateView):

@@ -47,15 +47,6 @@ class LabelFormDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('labels_index')
     success_message = _('Label successfully deleted')
 
-#    def form_valid(self, form):
-#        success_url = self.get_success_url()
-#        try:
-#            self.object.delete()
-#        except ProtectedError:
-#            messages.error(request, _("It is not possible to delete a label because it is being used"))
-#        finally:
-#            return redirect(success_url)
-
     def post(self, request, *args, **kwargs):
         try:
             return super().post(request, *args, **kwargs)
