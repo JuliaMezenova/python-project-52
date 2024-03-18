@@ -67,7 +67,6 @@ class LabelTest(TestCase):
         self.assertNotIn('Sunflower', content)
         self.assertContains(post_response, _("Label successfully deleted"))
 
-
     def test_read_label(self):
         get_response = self.client.get(self.labels_list)
         self.assertEqual(len(Label.objects.all()), 5)

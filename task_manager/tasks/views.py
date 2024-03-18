@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect
-from django.views import View
+from django.shortcuts import redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from .models import Task

@@ -95,7 +95,7 @@ class TaskTest(TestCase):
         self.assertIn(self.task2.name, content)
         self.assertIn(self.task3.name, content)
         self.assertIn(self.task4.name, content)
-    
+
     def test_task_filter(self):
         self.client.force_login(self.user1)
         request_form_1 = f'{self.tasks_list}?status=3&executor=&label=1'
@@ -104,7 +104,7 @@ class TaskTest(TestCase):
         self.assertEqual(filtered_tasks.count(), 1)
         result_task1 = filtered_tasks[0]
         self.assertEqual(result_task1.name, 'Make project number 4')
-        self.assertEqual(result_task1.status.id, 3 )
+        self.assertEqual(result_task1.status.id, 3)
         self.assertEqual(result_task1.author.id, 1)
         request_form_2 = f'{self.tasks_list}?status=&executor=&label=&only_self_tasks=on'
         get_response = self.client.get(request_form_2)

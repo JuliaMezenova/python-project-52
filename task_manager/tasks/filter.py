@@ -1,14 +1,12 @@
 from django import forms
 import django_filters
 from .models import Task
-from ..users.models import User
-from ..statuses.models import Status
 from ..labels.models import Label
 from django.utils.translation import gettext as _
 
 
 class TaskFilter(django_filters.FilterSet):
-    label  = django_filters.ModelChoiceFilter(
+    label = django_filters.ModelChoiceFilter(
         label=_("Label"),
         field_name='labels',
         queryset=Label.objects.all()
