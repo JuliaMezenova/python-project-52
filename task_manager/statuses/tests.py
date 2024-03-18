@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class StatusTest(TestCase):
-    fixtures = ["statuses.json", "users.json"]
+    fixtures = ["statuses.json", "users.json", "tasks.json", "labels.json"]
 
     def setUp(self):
         self.client = Client()
@@ -53,7 +53,7 @@ class StatusTest(TestCase):
         self.assertEqual(len(Status.objects.all()), 4)
         content = post_response.content.decode()
         self.assertIn('New', content)
-        self.assertContains(post_response, _("It is not possible to delete a status because it is being used"))
+        self.assertContains(post_response, _("The status cannot be deleted because it is in use."))
 
     def test_delete_not_used_status(self):
         delete_url = reverse('status_delete', args=[self.status2.pk])
@@ -74,7 +74,7 @@ class StatusTest(TestCase):
 
 
 class MyTest(TestCase):
-    fixtures = ["statuses.json"]
+    fixtures = ["statuses.json", "users.json", "tasks.json", "labels.json"]
 
     def test_should_create_status(self):
         status = Status.objects.get(pk=4)
