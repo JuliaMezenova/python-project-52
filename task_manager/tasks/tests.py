@@ -104,25 +104,25 @@ class TaskTest(TestCase):
         self.assertEqual(filtered_tasks.count(), 1)
         result_task1 = filtered_tasks[0]
         self.assertEqual(result_task1.name, 'Make project number 4')
-        self.assertEqual(result_task1.status, 'On testing')
-        self.assertEqual(result_task1.author, 'Julia Mezenova')
+        self.assertEqual(result_task1.status.id, 3 )
+        self.assertEqual(result_task1.author.id, 1)
         request_form_2 = f'{self.tasks_list}?status=&executor=&label=&only_self_tasks=on'
         get_response = self.client.get(request_form_2)
         filtered_tasks = get_response.context['filtered_tasks']
         self.assertEqual(filtered_tasks.count(), 2)
         result_task1 = filtered_tasks[0]
         self.assertEqual(result_task1.id, 1)
-        self.assertEqual(result_task1.status, 'On testing')
+        self.assertEqual(result_task1.status.id, 3)
         result_task2 = filtered_tasks[1]
         self.assertEqual(result_task2.id, 2)
-        self.assertEqual(result_task2.status, 'New')
+        self.assertEqual(result_task2.status.id, 1)
         request_form_3 = f'{self.tasks_list}?status=4&executor=2&label='
         get_response = self.client.get(request_form_3)
         filtered_tasks = get_response.context['filtered_tasks']
         self.assertEqual(filtered_tasks.count(), 1)
         result_task1 = filtered_tasks[0]
         self.assertEqual(result_task1.id, 4)
-        self.assertEqual(result_task1.status, 'Completed')
+        self.assertEqual(result_task1.status.id, 4)
 
 
 class MyTest(TestCase):
