@@ -4,6 +4,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from .forms import UserLoginForm
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 class IndexView(View):
@@ -16,14 +17,10 @@ class IndexView(View):
         )
 
 
-class UserLoginView(LoginView):
+class UserLoginView(SuccessMessageMixin, LoginView):
     template_name = 'login.html'
     class_form = UserLoginForm
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            messages.success(request, _("You are logged in"))
-        return super().dispatch(request, *args, **kwargs)
+    success_message = _("You are logged in")
 
 
 class UserLogoutView(LogoutView):
