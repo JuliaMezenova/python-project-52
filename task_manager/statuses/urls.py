@@ -1,5 +1,10 @@
 from django.urls import path
-from.views import IndexView, StatusFormCreateView, StatusFormUpdateView, StatusFormDeleteView
+from.views import (
+    IndexView,
+    StatusFormCreateView,
+    StatusFormUpdateView,
+    StatusFormDeleteView
+)
 
 
 urlpatterns = [

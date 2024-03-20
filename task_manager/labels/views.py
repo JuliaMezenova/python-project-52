@@ -51,5 +51,8 @@ class LabelFormDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         try:
             return super().post(request, *args, **kwargs)
         except ProtectedError:
-            messages.error(request, _("It is not possible to delete a label because it is being used"))
+            messages.error(
+                request,
+                _("It is not possible to delete a label because it is being used")
+            )
             return redirect(reverse_lazy('labels_index'))

@@ -54,7 +54,10 @@ class LabelTest(TestCase):
         self.assertEqual(len(Label.objects.all()), 5)
         content = post_response.content.decode()
         self.assertIn('Romashka', content)
-        self.assertContains(post_response, _("It is not possible to delete a label because it is being used"))
+        self.assertContains(
+            post_response,
+            _("It is not possible to delete a label because it is being used")
+        )
 
     def test_delete_not_used_label(self):
         delete_url = reverse('label_delete', args=[self.label5.pk])
