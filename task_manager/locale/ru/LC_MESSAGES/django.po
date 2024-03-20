@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-20 11:17+0500\n"
+"POT-Creation-Date: 2024-03-20 14:44+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -234,7 +234,7 @@ msgstr "Статусы"
 msgid "Tasks"
 msgstr "Задачи"
 
-#: task_manager/templates/nav_user.html:26
+#: task_manager/templates/nav_user.html:28
 msgid "Exit"
 msgstr "Выход"
 
@@ -323,34 +323,34 @@ msgstr "Подтверждение пароля"
 msgid "To confirm, please enter the password again."
 msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
 
-#: task_manager/users/tests.py:129 task_manager/users/views.py:44
+#: task_manager/users/tests.py:129 task_manager/users/views.py:45
 msgid "The user has been successfully changed"
 msgstr "Пользователь успешно изменен"
 
-#: task_manager/users/tests.py:156 task_manager/users/views.py:71
+#: task_manager/users/tests.py:156 task_manager/users/views.py:72
 msgid "The user has been successfully deleted"
 msgstr "Пользователь успешно удален"
 
-#: task_manager/users/views.py:35
+#: task_manager/users/views.py:32
 msgid "The user has been successfully registered"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/users/views.py:50 task_manager/users/views.py:77
+#: task_manager/users/views.py:51 task_manager/users/views.py:78
 msgid "You do not have the rights to change another user."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/users/views.py:56 task_manager/users/views.py:83
+#: task_manager/users/views.py:57 task_manager/users/views.py:84
 msgid "You are not logged in! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: task_manager/users/views.py:90
+#: task_manager/users/views.py:91
 msgid "It is not possible to delete a user because it is being used"
 msgstr "Невозможно удалить пользователя, потому что он используется"
 
-#: task_manager/views.py:25
+#: task_manager/views.py:23
 msgid "You are logged in"
 msgstr "Вы залогинены"
 
-#: task_manager/views.py:32
+#: task_manager/views.py:29
 msgid "You are logged out"
 msgstr "Вы разлогинены"

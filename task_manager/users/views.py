@@ -25,15 +25,11 @@ class IndexView(View):
         )
 
 
-class UserFormCreateView(CreateView):
+class UserFormCreateView(SuccessMessageMixin, CreateView):
     form_class = RegisterUserForm
     template_name = 'users/create.html'
     success_url = reverse_lazy('login')
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            messages.success(request, _("The user has been successfully registered"))
-        return super().dispatch(request, *args, **kwargs)
+    success_message = _("The user has been successfully registered")
 
 
 class UserFormUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
