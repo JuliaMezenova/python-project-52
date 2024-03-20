@@ -31,9 +31,10 @@ SECRET_KEY = os.getenv('SECRET_KEY', "test_secret_key")
 DEBUG = os.getenv('DEBUG', False)
 
 ALLOWED_HOSTS = [
+    'localhost',
     'webserver',
     '127.0.0.1',
-    'task-manager-ravg.onrender.com'
+    'task-manager-ravg.onrender.com',
 ]
 
 # Application definition
